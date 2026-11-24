@@ -28,16 +28,39 @@ function App() {
       const operators = ['+', '-', '*', '/']
 
       if (operators.includes(lastDigit)) {
-        return `${expression.slice(0, -1)}${operator}`
+        return `${expression.slice(0, -1)}${operator} `
       }
 
-      return `${expression} ${operator}`
+      return `${expression} ${operator} `
     })      
   }
-  //Temporary
-  function handleEquals() {
-    setDisplay('You do it')
-    setJustCalculated(true)
+  
+
+  async function handleEquals() {
+    try {
+      const response = await fetch('/api/calculate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          expression: display,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error(`Oh no I can't accept this request`)
+      }
+
+      const data = await response.json()
+
+      setDisplay(data.message)
+      setJustCalculated(true)
+    } catch (error) {
+      console.error(error)
+      setDisplay('WTH is that?! You do it')
+      setJustCalculated(true)
+    }
   } 
 
   function clearAll() {
