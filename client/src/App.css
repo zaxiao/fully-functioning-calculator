@@ -1,0 +1,98 @@
+.page {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.page > h1 {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.page > h4 {
+  margin: 12px 0 32px;
+  font-size: 18px;
+  font-weight: normal;
+  text-align: center;
+  transform: rotate(-3deg);
+}
+
+.calculator {
+  padding: 24px;
+  background: #fffdf5;
+  border: 3px solid #292524;
+  border-radius: 18px 24px 15px 22px;
+  box-shadow: 7px 7px 0 #292524;
+  position: relative;
+}
+
+.display {
+  display: block;
+  min-height: 110px;
+  padding: 16px;
+  background: #f5efc9;
+  border: 2px solid #292524;
+  border-radius: 7px 12px 8px 5px;
+  font-size: 28px;
+  line-height: 1.4;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.keypad .thinking-button {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.keypad .thinking-button:hover,
+.keypad .thinking-button:active {
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.boring-flag {
+  position: absolute;
+  top: 28px;
+  right: -90px;
+  width: 82px;
+  padding: 12px 18px 12px 10px;
+
+  background: #842b35;
+  color: #fffdf5;
+  border: none;
+  clip-path: polygon(0 0, 100% 0, 85% 50%, 100% 100%, 0 100%);
+
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transform: rotate(3deg);
+}
+
+.boring-flag:hover {
+  background: #a13945;
+}
+
+.boring-flag:focus-visible {
+  outline: 2px dashed #fffdf5;
+  outline-offset: -6px;
+}
+
+/* Keep the flag on screen when there isn't room beside the calculator. */
+@media (max-width: 680px) {
+  .boring-flag {
+    top: -24px;
+    right: -10px;
+  }
+}

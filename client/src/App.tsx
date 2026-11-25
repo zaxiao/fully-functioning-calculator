@@ -1,5 +1,6 @@
 import './App.css'
 import { useEffect, useRef, useState } from 'react'
+import LatticeLoader from './components/LatticeLoader'
 
 const konamiCode = [
   'arrowup', 'arrowup',
@@ -124,38 +125,54 @@ function App() {
   }
 
   return (
-    <main>
+    <main className="page">
       <h1>I am a fully functioning calculator</h1>
+      <h4>and I'm very polite</h4>
 
-      <output>{display}</output>
+      <section className="calculator" aria-label="Calculator">
+        <output className="display">{display}</output>
 
-      <div>
+        <div className="keypad">
+          <button onClick={clearAll}>AC</button>
+          <button onClick={deleteLastDigit}>C</button>
+          <button onClick={handleEquals}>=</button>
+          <button onClick={() => chooseOperator('/')}>/</button>
+          <button onClick={() => appendDigit('7')}>7</button>
+          <button onClick={() => appendDigit('8')}>8</button>
+          <button onClick={() => appendDigit('9')}>9</button>
+          <button onClick={() => chooseOperator('*')}>*</button>
+          <button onClick={() => appendDigit('4')}>4</button>
+          <button onClick={() => appendDigit('5')}>5</button>
+          <button onClick={() => appendDigit('6')}>6</button>
+          <button onClick={() => chooseOperator('-')}>-</button>
+          <button onClick={() => appendDigit('1')}>1</button>
+          <button onClick={() => appendDigit('2')}>2</button>
+          <button onClick={() => appendDigit('3')}>3</button>
+          <button onClick={() => chooseOperator('+')}>+</button>
+          <button onClick={() => appendDigit('0')}>0</button>
+          <button onClick={() => ('WIP')}>.WIP</button>
+          <button onClick={() => ('WIP')}>%WIP</button>
+          <button
+            className="thinking-button"
+            type="button"
+            aria-label="Thinking"
+          >
+          <LatticeLoader showTimer={false} />
+          </button>
+        </div>
+
         {normalMode && (
-        <button onClick={() => {
-          setNormalMode(false)
-          clearAll()
-        }}>
-          This is boring
+        <button
+          className="boring-flag"
+          onClick={() => {
+            setNormalMode(false)
+            clearAll()
+          }}
+        >
+          This is<br />boring
         </button>
         )}
-        <button onClick={() => appendDigit('1')}>1</button>
-        <button onClick={() => appendDigit('2')}>2</button>
-        <button onClick={() => appendDigit('3')}>3</button>
-        <button onClick={() => appendDigit('4')}>4</button>
-        <button onClick={() => appendDigit('5')}>5</button>
-        <button onClick={() => appendDigit('6')}>6</button>
-        <button onClick={() => appendDigit('7')}>7</button>
-        <button onClick={() => appendDigit('8')}>8</button>
-        <button onClick={() => appendDigit('9')}>9</button>
-        <button onClick={() => appendDigit('0')}>0</button>
-        <button onClick={() => chooseOperator('+')}>+</button>
-        <button onClick={() => chooseOperator('-')}>-</button>
-        <button onClick={() => chooseOperator('*')}>*</button>
-        <button onClick={() => chooseOperator('/')}>/</button>
-        <button onClick={handleEquals}>=</button>
-        <button onClick={clearAll}>AC</button>
-        <button onClick={deleteLastDigit}>C</button>
-      </div>
+      </section>
     </main>
   )
 }
