@@ -46,6 +46,7 @@ function App() {
   const [display, setDisplay] = useState('0')
   const [justCalculated, setJustCalculated] = useState(false)
   const [normalMode, setNormalMode] = useState(false)
+  const showUpsideDown = !normalMode && display === '5318008'
 
   //To look up -> the current => structure??
   function appendDigit(digit: string) {
@@ -78,6 +79,11 @@ function App() {
   
 
   async function handleEquals() {
+    if (showUpsideDown) {
+      setJustCalculated(true)
+      return
+    }
+
     try {
       const response = await fetch('/api/calculate', {
         method: 'POST',
@@ -130,7 +136,13 @@ function App() {
       <h3>Be warned: I'm VERY polite</h3>
 
       <section className="calculator" aria-label="Calculator">
-        <output className="display">{display}</output>
+        <output className="display">
+          {showUpsideDown ? (
+            <span className="display-upside-down" role="img" aria-label="BOOBIES">
+              {display}
+            </span>
+          ) : display}
+        </output>
 
         <div className="keypad">
           <button onClick={clearAll}>AC</button>
