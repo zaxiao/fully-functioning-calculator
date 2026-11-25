@@ -1,5 +1,3 @@
-import express from 'express'
-
 const easyCalculationSass = [
     `SERIOUSLY??? USE YOUR BRAIN`,
     `YOU REALLY NEEDED ME FOR THIS?`,
@@ -15,6 +13,16 @@ const hardCalculationSass = [
     `&A%n@/^9&$`,
     `YOU NEED TO PAY ME MORE FOR THIS`
 ]
+
+const expressionEasterEggs = new Map([
+    ['22/7', 'NICE TRY. PI IS STILL IRRATIONAL.'],
+    ['1+2+3+4+5', '15. WERE YOU GOING TO COUNT ALL DAY?'],
+])
+
+const resultEasterEggs = new Map([
+    [42, 'Answer to the Ultimate Question of Life, the Universe, and Everything'],
+
+])
 
 function isEasyCalculation(expression: string): boolean {
     const numbers = expression
@@ -57,7 +65,19 @@ function pickRandom(sass: string[]): string {
   return sass[index]!
 }
 
-export function getSassed(expression: string): string {
+export function getSassed(expression: string, result: number): string {
+    const normalisedExpression = expression.replace(/\s/g, '')
+    const easterEgg = expressionEasterEggs.get(normalisedExpression)
+        ?? resultEasterEggs.get(result)
+
+    if (easterEgg !== undefined) {
+        return easterEgg
+    }
+
+    if (/^\d+$/.test(normalisedExpression)) {
+        return `${result} equals ${result}, what a surprise`
+    }
+
     const sassComments = isEasyCalculation(expression)
         ? easyCalculationSass
         : hardCalculationSass

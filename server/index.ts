@@ -31,7 +31,7 @@ app.post('/api/calculate', (req, res) => {
     res.json({
         message: normalMode
         ? String(result)
-        : getSassed(expression),
+        : getSassed(expression, result),
     })
   })
 
