@@ -12,9 +12,10 @@
   text-align: center;
 }
 
-.page > h4 {
+.page > h3 {
   margin: 12px 0 32px;
   font-size: 18px;
+  color: #292524;
   font-weight: normal;
   text-align: center;
   transform: rotate(-3deg);

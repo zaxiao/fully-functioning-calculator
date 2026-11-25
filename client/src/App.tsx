@@ -127,7 +127,7 @@ function App() {
   return (
     <main className="page">
       <h1>I am a fully functioning calculator</h1>
-      <h4>and I'm very polite</h4>
+      <h3>Be warned: I'm VERY polite</h3>
 
       <section className="calculator" aria-label="Calculator">
         <output className="display">{display}</output>
