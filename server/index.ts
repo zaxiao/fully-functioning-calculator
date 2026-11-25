@@ -1,5 +1,6 @@
 import express from 'express'
 import { getSassed } from './sass.js'
+import { fileURLToPath } from 'node:url'
 
 const app = express()
 
@@ -34,7 +35,14 @@ app.post('/api/calculate', (req, res) => {
     })
   })
 
+const frontendPath = fileURLToPath(
+  new URL('../client/dist/', import.meta.url),
+)
 
-app.listen(3001, () => {
-  console.log('Backend running at http://localhost:3001')
+app.use(express.static(frontendPath))
+
+const port = Number(process.env.PORT || 3001)
+
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server running on port ${port}`)
 })
