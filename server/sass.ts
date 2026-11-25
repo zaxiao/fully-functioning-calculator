@@ -43,7 +43,7 @@ function isEasyCalculation(expression: string): boolean {
         return allBelow10 && operators.length <= 3
     }
 
-    if (allBelow10) {
+    if (allBelow100) {
         return operators.length <= 4
     }
 
