@@ -1,10 +1,50 @@
 import './App.css'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+
+const konamiCode = [
+  'arrowup', 'arrowup',
+  'arrowdown', 'arrowdown',
+  'arrowleft', 'arrowright',
+  'arrowleft', 'arrowright',
+  'b', 'a',
+]
 
 function App() {
+  const recentKeys = useRef<string[]>([])
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.repeat || event.ctrlKey || event.metaKey || event.altKey) {
+        return
+      }
+
+      recentKeys.current = [
+        ...recentKeys.current,
+        event.key.toLowerCase(),
+      ].slice(-konamiCode.length)
+
+      const matches =
+        recentKeys.current.length === konamiCode.length &&
+        recentKeys.current.every((key, index) => key === konamiCode[index])
+
+      if (matches) {
+        setNormalMode(true)
+        clearAll()
+        recentKeys.current = []
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [])
+
   //To look up -> the structure [] and useState?
   const [display, setDisplay] = useState('0')
   const [justCalculated, setJustCalculated] = useState(false)
+  const [normalMode, setNormalMode] = useState(false)
 
   //To look up -> the current => structure??
   function appendDigit(digit: string) {
@@ -45,6 +85,7 @@ function App() {
         },
         body: JSON.stringify({
           expression: display,
+          normalMode
         }),
       })
 
@@ -58,7 +99,7 @@ function App() {
       setJustCalculated(true)
     } catch (error) {
       console.error(error)
-      setDisplay('WTH is that?! You do it')
+      setDisplay('WTH is that?! You do it🙄')
       setJustCalculated(true)
     }
   } 
@@ -84,11 +125,19 @@ function App() {
 
   return (
     <main>
-      <h1>I am a FULLY functioning calculator</h1>
+      <h1>I am a fully functioning calculator</h1>
 
       <output>{display}</output>
 
       <div>
+        {normalMode && (
+        <button onClick={() => {
+          setNormalMode(false)
+          clearAll()
+        }}>
+          This is boring
+        </button>
+        )}
         <button onClick={() => appendDigit('1')}>1</button>
         <button onClick={() => appendDigit('2')}>2</button>
         <button onClick={() => appendDigit('3')}>3</button>

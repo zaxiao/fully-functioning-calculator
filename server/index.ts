@@ -1,4 +1,5 @@
 import express from 'express'
+import { getSassed } from './sass.js'
 
 const app = express()
 
@@ -24,10 +25,15 @@ app.post('/api/calculate', (req, res) => {
     return
   }
 
-  res.json({
-    message: String(result),
+    const normalMode = req.body.normalMode === true
+
+    res.json({
+        message: normalMode
+        ? String(result)
+        : getSassed(expression),
+    })
   })
-})
+
 
 app.listen(3001, () => {
   console.log('Backend running at http://localhost:3001')
