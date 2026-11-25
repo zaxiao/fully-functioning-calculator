@@ -1,75 +1,14 @@
-# React + TypeScript + Vite
+# Fully Functioning Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Calculator easter eggs
 
-Currently, two official plugins are available:
+| Trigger | What happens |
+| --- | --- |
+| Enter `5318008` on the keypad | The display immediately flips the digits in DSEG7 Classic Bold to read **BOOBIES**. Pressing `=` keeps it on screen. |
+| Calculate `22 / 7` | `NICE TRY. PI IS STILL IRRATIONAL.` |
+| Calculate `1 + 2 + 3 + 4 + 5` | `15. WERE YOU GOING TO COUNT ALL DAY?` |
+| Get a result of `42`, for example with `6 * 7` | `Answer to the Ultimate Question of Life, the Universe, and Everything` |
+| Enter a plain number such as `7` and press `=` | `7 equals 7, what a surprise` |
+| Type `↑ ↑ ↓ ↓ ← → ← → B A` on your keyboard | The Konami Code clears the display and enables normal mode, which shows numeric answers. Click **This is boring** to return to sass mode. |
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+The display and calculation jokes are available in sass mode.
